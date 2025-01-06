@@ -140,6 +140,17 @@ pub trait AuthnBackend: Clone + Send + Sync {
     async fn get_user(&self, user_id: &UserId<Self>) -> Result<Option<Self::User>, Self::Error>;
 }
 
+#[async_trait]
+pub trait BearerAuthnBackend {
+    type Principal: Send + Sync;
+
+    type Bearer: Send + Sync;
+
+    type Error: std::error::Error + Send + Sync;
+
+    async fn authenticate(&self, bearer: Self::Bearer) -> Result<Option<Self::Principal>, Self::Error>;
+}
+
 /// A backend which can authorize users.
 ///
 /// Backends must implement `AuthnBackend`.

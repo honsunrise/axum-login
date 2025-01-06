@@ -388,7 +388,7 @@
 #![forbid(unsafe_code)]
 
 pub use axum;
-pub use backend::{AuthUser, AuthnBackend, AuthzBackend, UserId};
+pub use backend::{AuthUser, AuthnBackend, AuthzBackend, BearerAuthnBackend, UserId};
 #[doc(hidden)]
 pub use middleware::url_with_redirect_query;
 pub use service::{AuthManager, AuthManagerLayer, AuthManagerLayerBuilder};
@@ -397,6 +397,8 @@ pub use tower_sessions;
 pub use tracing;
 
 mod backend;
+mod bearer;
+mod bearer_service;
 mod extract;
 mod middleware;
 mod service;
